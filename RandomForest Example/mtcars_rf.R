@@ -13,8 +13,6 @@
 
 ## Libraries
 
-install.packages("randomForest") #this is not working here
-
 library(randomForest)  
 
 # Load the mtcars dataset
@@ -56,7 +54,7 @@ predictions <- predict(rf1, newdata = test)
 
 # Evaluate the model
 rmse <- mean((predictions - test$mpg)^2)
-print(rmse) # 4.10
+print(rmse) # 4.10 - ## what does this mean?
 
 ## RF model 2
 rf2 <- randomForest(mpg ~ ., data = train, ntree = 1000, mtry = 3,
@@ -68,7 +66,7 @@ predictions <- predict(rf2, newdata = test)
 
 # Evaluate the model
 rmse <- mean((predictions - test$mpg)^2)
-print(rmse) # 4.39
+print(rmse) # 4.39 - ## is higher better? is this is SE then lower is better
 
 ## RF model 3
 rf3 <- randomForest(mpg ~ ., data = train, ntree = 1500, mtry = 3,
@@ -138,7 +136,7 @@ print(rmse) # 3.80
 
 ## max_depth of 15 is best
 
-## Model 7 is the best model.
+## Model 7 is the best model. - must mean RMSE (residual mean std error?) needs to be lower
 
 # Plot the variable importance for the best model, Model 7, using node purity
 
