@@ -27,6 +27,10 @@
 ### visualize a bag - each time you take a sample that is in your bag, your training sample is out of the bag
 ### out of bag error - this is talking about the variance of the model (RMSE)
 
+### > node purity ----
+### referring to the nodes - when multiple values end up in the same leaf node and they are close together. if you have
+### values that are not close together are considered impure
+
 ### Process ----
 
 ### > Steps ----
