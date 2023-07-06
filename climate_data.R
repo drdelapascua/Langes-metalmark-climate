@@ -133,6 +133,21 @@ df7
 
 # Fall precipitation
 
+# Group by mean using dplyr
+#danielle start here ----
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 9 | Month == 10 | Month == 11) %>% #filter only the month we want
+  mutate(mass_norm = Precip / mean(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Fall_precip=mean(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+df8 <- agg_tbl %>% as.data.frame()
+df8
+
 # Winter precipitation
 
 #Winter temperature standard deviation
