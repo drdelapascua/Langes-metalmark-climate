@@ -19,16 +19,15 @@ head(dat)
 
 ### variables
 
-# November min temperature
-
+### November min temperature
 
 # Group by mean using dplyr
 agg_tbl <- dat %>% 
-  select(Year, Month, Day, min) %>%
-  mutate(.keep = )
-  mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>%
-  group_by(Month) %>% 
-  summarise(mean_salary=mean(Day),
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 11) %>% #filter only the month we want
+  mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Nov_min=mean(min), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -36,17 +35,101 @@ agg_tbl
 df1 <- agg_tbl %>% as.data.frame()
 df1
 
-# November maximum temperature
+### November maximum temperature
 
-# August maximum temperature
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Air.max) %>% #select what we need
+  filter(Month == 11) %>% #filter only the month we want
+  mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Nov_max=mean(Air.max), #name the new means column
+            .groups = 'drop')
+agg_tbl
 
-# Dec min temperature
+# Convert tibble to df
+df2 <- agg_tbl %>% as.data.frame()
+df2
 
-# January min temperature
+### August maximum temperature
 
-# September max temperature
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Air.max) %>% #select what we need
+  filter(Month == 8) %>% #filter only the month we want
+  mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Aug_max=mean(Air.max), #name the new means column
+            .groups = 'drop')
+agg_tbl
 
-# July max temperature
+# Convert tibble to df
+df3 <- agg_tbl %>% as.data.frame()
+df3
+
+### Dec min temperature
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 12) %>% #filter only the month we want
+  mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Dec_min=mean(min), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+df4 <- agg_tbl %>% as.data.frame()
+df4
+
+### January min temperature
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 1) %>% #filter only the month we want
+  mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Jan_min=mean(min), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+df5 <- agg_tbl %>% as.data.frame()
+df5
+
+### September max temperature
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Air.max) %>% #select what we need
+  filter(Month == 9) %>% #filter only the month we want
+  mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Sept_max=mean(Air.max), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+df6 <- agg_tbl %>% as.data.frame()
+df6
+
+### July max temperature
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Air.max) %>% #select what we need
+  filter(Month == 7) %>% #filter only the month we want
+  mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(July_max=mean(Air.max), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+df7 <- agg_tbl %>% as.data.frame()
+df7
 
 # Fall precipitation
 
