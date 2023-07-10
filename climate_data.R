@@ -133,22 +133,113 @@ df7
 
 # Fall precipitation
 
+# > September precipitation
+
 # Group by mean using dplyr
-#danielle start here ----
 agg_tbl <- dat %>% 
   select(Year, Month, Day, Precip) %>% #select what we need
-  filter(Month == 9 | Month == 10 | Month == 11) %>% #filter only the month we want
-  mutate(mass_norm = Precip / mean(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  filter(Month == 9) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(Fall_precip=mean(Precip), #name the new means column
+  summarise(Fall_precip=sum(Precip), #name the new means column
             .groups = 'drop')
 agg_tbl
 
 # Convert tibble to df
-df8 <- agg_tbl %>% as.data.frame()
-df8
+precip_sept <- agg_tbl %>% as.data.frame()
+precip_sept
+
+# > October precipitation
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 10) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Fall_precip=sum(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+precip_oct <- agg_tbl %>% as.data.frame()
+precip_oct
+
+# > November precipitation
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 11) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(Fall_precip=sum(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+precip_nov <- agg_tbl %>% as.data.frame()
+precip_nov
+
+# Add september, october, and november precipitation values
+fall_precip<- precip_sept$Fall_precip + precip_oct$Fall_precip + precip_nov$Fall_precip
+years <- c(1986:2022)
+precip_fall <- data.frame(years, fall_precip)
 
 # Winter precipitation
+
+# > December precipitation
+
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 12 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(winter_precip=sum(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+precip_dec <- agg_tbl %>% as.data.frame()
+precip_dec 
+
+# > January
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 1 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(winter_precip=sum(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+precip_jan <- agg_tbl %>% as.data.frame()
+precip_jan 
+
+# > January
+# Group by mean using dplyr
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 2 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sum(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(winter_precip=sum(Precip), #name the new means column
+            .groups = 'drop')
+agg_tbl
+
+# Convert tibble to df
+precip_feb <- agg_tbl %>% as.data.frame()
+precip_feb 
+
+## i need to fix the variables, need to get december from the year before to add to winter precip
+
+precip_dec
+
+values <- precip_dec$winter_precip
+
 
 #Winter temperature standard deviation
 
