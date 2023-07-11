@@ -36,10 +36,10 @@ df1 <- agg_tbl %>% as.data.frame()
 df1
 
 # converting to "last november"
-min_temp <- df1$Nov_min
-min_temp <- head(min_temp, -1)
+nov_min_temp <- df1$Nov_min
+nov_min_temp <- head(nov_min_temp, -1)
 years <- c(1986:2022)
-last_nov_min_temp <- data.frame(years, min_temp)
+last_nov_min_temp <- data.frame(years, nov_min_temp)
 
 ### November maximum temperature
 
@@ -58,10 +58,10 @@ df2 <- agg_tbl %>% as.data.frame()
 df2
 
 # converting to "last november"
-max_temp <- df2$max_temp
-max_temp <- head(max_temp, -1)
+nov_max_temp <- df2$max_temp
+nov_max_temp <- head(nov_max_temp, -1)
 years <- c(1986:2022)
-last_nov_max_temp <- data.frame(years, min_temp)
+last_nov_max_temp <- data.frame(years, nov_max_temp)
 
 ### August maximum temperature
 
@@ -71,13 +71,14 @@ agg_tbl <- dat %>%
   filter(Month == 8) %>% #filter only the month we want
   mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(Aug_max=mean(Air.max), #name the new means column
+  summarise(aug_max_temp=mean(Air.max), #name the new means column
             .groups = 'drop')
 agg_tbl
 
 # Convert tibble to df
 df3 <- agg_tbl %>% as.data.frame()
 august_max_temp <- df3
+head(august_max_temp)
 
 ### Dec min temperature
 
@@ -87,7 +88,7 @@ agg_tbl <- dat %>%
   filter(Month == 12) %>% #filter only the month we want
   mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(Dec_min=mean(min), #name the new means column
+  summarise(dec_min_temp=mean(min), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -96,10 +97,11 @@ df4 <- agg_tbl %>% as.data.frame()
 df4
 
 # converting to "last december"
-min_temp <- df4$Dec_min
-min_temp <- head(min_temp, -1)
+dec_min_temp <- df4$dec_min_temp
+dec_min_temp <- head(dec_min_temp, -1)
 years <- c(1986:2022)
-last_dec_min_temp <- data.frame(years, min_temp)
+last_dec_min_temp <- data.frame(years, dec_min_temp)
+head(last_dec_min_temp)
 
 ### January min temperature
 
@@ -109,7 +111,7 @@ agg_tbl <- dat %>%
   filter(Month == 1) %>% #filter only the month we want
   mutate(mass_norm = min / mean(min, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(Jan_min=mean(min), #name the new means column
+  summarise(jan_min_temp=mean(min), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -125,7 +127,7 @@ agg_tbl <- dat %>%
   filter(Month == 9) %>% #filter only the month we want
   mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(Sept_max=mean(Air.max), #name the new means column
+  summarise(sept_max_temp=mean(Air.max), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -134,10 +136,10 @@ df6 <- agg_tbl %>% as.data.frame()
 df6
 
 # converting to "last september"
-max_temp <- df6$Sept_max
-max_temp <- head(max_temp, -1)
+sept_max_temp <- df6$sept_max_temp
+sept_max_temp <- head(sept_max_temp, -1)
 years <- c(1986:2022)
-last_nov_min_temp <- data.frame(years, max_temp)
+last_sept_min_temp <- data.frame(years, sept_max_temp)
 
 ### July max temperature
 
@@ -147,7 +149,7 @@ agg_tbl <- dat %>%
   filter(Month == 7) %>% #filter only the month we want
   mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(July_max=mean(Air.max), #name the new means column
+  summarise(july_max_temp=mean(Air.max), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -216,6 +218,13 @@ values <- precip_fall$fall_precip
 years <- c(1986:2023)
 last_fall_precip <- data.frame(years, values)  
 
+head(last_fall_precip)
+
+#change names
+colnames(last_fall_precip) = c("years", "fall_precip")
+
+head(last_fall_precip)
+
 # Winter precipitation
 
 # > December precipitation
@@ -279,8 +288,148 @@ winter_precip <- head(winter_precip, -1)
 years <- c(1986:2022)
 precip_winter <- data.frame(years, winter_precip)
 
-#Winter temperature standard deviation
+#Winter yearly temperature standard deviation
 
+#january sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 1 ) %>% #filter only the month we want
+  mutate(mass_norm = min / sd(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(jan_sd=sd(min), #name the new means column
+            .groups = 'drop')
 
+#convert tibble to df
+agg_tbl
+jan_min_temp_sd <- agg_tbl %>% as.data.frame()
+jan_min_temp_sd
+
+# february sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 2 ) %>% #filter only the month we want
+  mutate(mass_norm = min / sd(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(feb_sd=sd(min), #name the new means column
+            .groups = 'drop')
+
+#convert tibble to df
+agg_tbl
+feb_min_temp_sd <- agg_tbl %>% as.data.frame()
+feb_min_temp_sd
+
+# dec sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, min) %>% #select what we need
+  filter(Month == 12 ) %>% #filter only the month we want
+  mutate(mass_norm = min / sd(min, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(dec_sd=sd(min), #name the new means column
+            .groups = 'drop')
+
+#convert tibble to df
+agg_tbl
+dec_min_temp_sd <- agg_tbl %>% as.data.frame()
+dec_min_temp_sd
+
+#last december 
+
+values <- dec_min_temp_sd$dec_sd
+years <- c(1986:2023)
+
+min_temp_sd_last_dec <- data.frame(years, values)
+
+#average across dataframes
+values <- (min_temp_sd_last_dec$values + jan_min_temp_sd$jan_sd + feb_min_temp_sd$feb_sd)
+values <- values/3
+years <- c(1986:2023)
+
+winter_temp_sd <- data.frame(years, values)
+
+# changes column names
+
+colnames(winter_temp_sd) = c("years", "winter_min_temp_sd")
+head(winter_temp_sd)
 
 #winter precipitation standard variation
+
+#january sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 1 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sd(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(jan_sd=sd(Precip), #name the new means column
+            .groups = 'drop')
+
+#convert tibble to df
+agg_tbl
+jan_precip_sd <- agg_tbl %>% as.data.frame()
+jan_precip_sd
+
+# february sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 2 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sd(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(feb_sd=sd(Precip), #name the new means column
+            .groups = 'drop')
+
+#convert tibble to df
+agg_tbl
+feb_precip_sd <- agg_tbl %>% as.data.frame()
+feb_precip_sd
+
+# dec sd
+agg_tbl <- dat %>% 
+  select(Year, Month, Day, Precip) %>% #select what we need
+  filter(Month == 12 ) %>% #filter only the month we want
+  mutate(mass_norm = Precip / sd(Precip, na.rm = TRUE)) %>% #calculate means at 'min'
+  group_by(Year) %>% 
+  summarise(dec_sd=sd(Precip), #name the new means column
+            .groups = 'drop')
+
+#convert tibble to df
+agg_tbl
+dec_precip_sd <- agg_tbl %>% as.data.frame()
+dec_precip_sd
+
+#last december 
+
+values <- dec_precip_sd$dec_sd
+years <- c(1986:2023)
+
+last_dec_precip_sd <- data.frame(years, values)
+
+#average across dataframes
+values <- (last_dec_precip_sd$values + jan_min_temp_sd$jan_sd + feb_min_temp_sd$feb_sd)
+values <- values/3
+years <- c(1986:2023)
+
+winter_precip_sd <- data.frame(years, values)
+
+#rename columns
+colnames(winter_precip_sd) = c("years", "winter_precip_sd")\
+head(winter_precip_sd)
+
+# upload occurance data
+butterflies <- read.csv("~/Langes-metalmark-climate/Data/abundance.csv")
+
+#merge dataframes
+head(butterflies)
+
+butterflies <- butterflies %>%
+  left_join(last_nov_min_temp, join_by(Year == years)) %>%
+  left_join(last_nov_max_temp, join_by(Year == years)) %>% 
+  left_join(august_max_temp, join_by(Year)) %>%
+  left_join(last_dec_min_temp, join_by(Year == years)) %>%
+  left_join(july_max_temp, join_by(Year)) %>%
+  left_join(january_min_temp, join_by(Year)) %>%
+  left_join(last_sept_min_temp, join_by(Year == years)) %>%
+  left_join(last_fall_precip, join_by(Year == years)) %>%
+  left_join(precip_winter, join_by(Year == years)) %>%
+  left_join(winter_temp_sd, join_by(Year == years)) %>%
+  left_join(winter_precip_sd, join_by(Year == years))
+
+write.csv(butterflies, "~/Langes-metalmark-climate/Data/butterflies.csv")
