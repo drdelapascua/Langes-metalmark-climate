@@ -64,6 +64,52 @@ ggplot(butterflies, aes(nov_max_temp, logN)) +
   geom_point() + 
   geom_smooth(method = lm) #really nice negative correlation here
 
+#logN ~ aug max
+ggplot(butterflies, aes(aug_max_temp, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #negative relationship - when august is hot, pop is lower
+
+# logN ~ dec min temp
+ggplot(butterflies, aes(dec_min_temp, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #negative but not as strong
+
+# logN ~ july max temp
+ggplot(butterflies, aes(july_max_temp, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # also negative - hotter = less population
+
+# logN ~ january min temp
+ggplot(butterflies, aes(jan_min_temp, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # not really a relationship - line is straight, data cloud
+
+# logN ~ september max temp
+ggplot(butterflies, aes(sept_max_temp, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #negative relationship - higher max septeber temp correlated with low N
+
+# logN ~ Fall precipitation
+ggplot(butterflies, aes(fall_precip, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #straight line - no relationship
+
+# logN ~ Winter precipitation
+ggplot(butterflies, aes(winter_precip, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # slightly positive relationship here
+
+# logN ~ winter min temp sd
+ggplot(butterflies, aes(winter_min_temp_sd, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # we DO see a positive relationship here? More variation in winter temp = higher pop?
+
+#logN ~ winter precip sd
+ggplot(butterflies, aes(winter_precip_sd, logN)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # positive relationship - more variation in precip better for pop? unexpected, but maybe low SD values are mapping onto dry winters?
+
+
 # > R ~ variables ----
 
 # R ~ november minimum temperature
@@ -76,4 +122,47 @@ ggplot(butterflies, aes(nov_max_temp, r)) +
   geom_point() + 
   geom_smooth(method = lm) # positive relationship
 
+# R ~ aug max temp
+ggplot(butterflies, aes(aug_max_temp, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # weak negative relationship 
 
+# R ~ december min temp
+ggplot(butterflies, aes(dec_min_temp, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # kinda weak negative relationship
+
+# R ~ july max temp
+ggplot(butterflies, aes(july_max_temp, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #negative relationship
+
+# R ~ january min temp
+ggplot(butterflies, aes(jan_min_temp, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #not too much relationship
+
+# R ~ september max temp
+ggplot(butterflies, aes(sept_max_temp, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #wow, strong negative relationship!
+
+# R ~ fall precipitation
+ggplot(butterflies, aes(fall_precip, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #weakly negative
+
+# R ~ winter precipitation
+ggplot(butterflies, aes(winter_precip, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #not a huge relationship, pretty straight across
+
+# R ~ winter min temperature sd
+ggplot(butterflies, aes(winter_min_temp_sd, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #positive
+
+# R ~ winter precipitation sd
+ggplot(butterflies, aes(winter_precip_sd, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #positive
