@@ -410,7 +410,7 @@ years <- c(1986:2023)
 winter_precip_sd <- data.frame(years, values)
 
 #rename columns
-colnames(winter_precip_sd) = c("years", "winter_precip_sd")\
+colnames(winter_precip_sd) = c("years", "winter_precip_sd")
 head(winter_precip_sd)
 
 # upload occurance data
