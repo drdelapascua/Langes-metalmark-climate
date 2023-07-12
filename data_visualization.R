@@ -52,6 +52,11 @@ write.csv(corr_mat, "~/Langes-metalmark-climate/output/correlation_matrix.csv")
 
 # simple relationships between predictor variables and responses variables ----
 
+# R ~ logN 
+ggplot(butterflies, aes(logN, r)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # positive relationship - higher logN, higher R
+
 # > logN ~ variables ----
 
 # logN ~ november minimum temperature
