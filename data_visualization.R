@@ -57,6 +57,11 @@ ggplot(butterflies, aes(logN, r)) +
   geom_point() + 
   geom_smooth(method = lm) # positive relationship - higher logN, higher R
 
+# logN ~ Year
+ggplot(butterflies, aes(logN, Year)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # very negative, will most likely need to be removed from the RF model
+
 # > logN ~ variables ----
 
 # logN ~ november minimum temperature
