@@ -119,6 +119,11 @@ ggplot(butterflies, aes(winter_precip_sd, logN)) +
   geom_point() + 
   geom_smooth(method = lm) # positive relationship - more variation in precip better for pop? unexpected, but maybe low SD values are mapping onto dry winters?
 
+#digging into that hypothesis : relationship between winter precip ~winter sd precip
+ggplot(butterflies, aes(winter_precip_sd, winter_precip)) + 
+  geom_point() + 
+  geom_smooth(method = lm) # No clear relationship here...
+
 
 # > R ~ variables ----
 

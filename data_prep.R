@@ -413,11 +413,24 @@ winter_precip_sd <- data.frame(years, values)
 colnames(winter_precip_sd) = c("years", "winter_precip_sd")
 head(winter_precip_sd)
 
+# august and september max temp variation
+
+# february min temperature
+
+# february max temperature
+
+# june max temperature
+
+# june & july max temperature variation
+
+# winter max temperature variation
+
 # upload occurance data
 butterflies <- read.csv("~/Langes-metalmark-climate/Data/abundance.csv")
 
 #merge dataframes
 head(butterflies)
+
 
 butterflies <- butterflies %>%
   left_join(last_nov_min_temp, join_by(Year == years)) %>%

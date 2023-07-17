@@ -146,4 +146,6 @@ varImpPlot(rf3, sort = TRUE, main = "Variable Importance Plot")
 
 dev.print(tiff, "varImpPlot_model3.tiff", height=4, width=6, units='in', res=300)
 
+# RF with just N, not logN
 
+butterfliesN <- 
