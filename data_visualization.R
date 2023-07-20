@@ -47,7 +47,7 @@ hist(butterflies$winter_precip_sd) #sorta normal
 # correlation among predictor variables ----
 
 corr_mat <- cor(butterflies)
-write.csv(corr_mat, "~/Langes-metalmark-climate/output/correlation_matrix.csv")
+write.csv(corr_mat, "~/Langes-metalmark-climate/output/correlation_matrix_7-19-23.csv")
 
 
 # simple relationships between predictor variables and responses variables ----
@@ -181,3 +181,18 @@ ggplot(butterflies, aes(winter_min_temp_sd, r)) +
 ggplot(butterflies, aes(winter_precip_sd, r)) + 
   geom_point() + 
   geom_smooth(method = lm) #positive
+
+# new ones 7-19-23
+
+# N ~ N-1
+ggplot(butterflies, aes(N.1, N)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #positive
+
+# N ~ september_max_temp_sd
+ggplot(butterflies, aes(september_max_temp_sd, N)) + 
+  geom_point() + 
+  geom_smooth(method = lm) #really nice negative correlation here
+
+head(sept_max_temp_sd)
+

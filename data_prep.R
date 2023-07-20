@@ -478,7 +478,7 @@ agg_tbl <- dat %>%
   filter(Month == 2) %>% #filter only the month we want
   mutate(mass_norm = Air.max / mean(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(max_temp=mean(Air.max), #name the new means column
+  summarise(feb_max_temp=mean(Air.max), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -526,7 +526,7 @@ agg_tbl <- dat %>%
   filter(Month == 7) %>% #filter only the month we want
   mutate(mass_norm = Air.max / sd(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(july_max_temp=sd(Air.max), #name the new means column
+  summarise(july_max_temp_sd=sd(Air.max), #name the new means column
             .groups = 'drop')
 agg_tbl
 
@@ -635,7 +635,8 @@ butterflies <- butterflies %>%
   left_join(last_dec_max_temp_sd, join_by(Year == years)) %>%
   left_join(last_nov_max_temp_sd, join_by(Year == years))
   
-  last_nov_max_temp_sd
+  head(last_nov_max_temp_sd)
   
-
+head(butterflies)
+  
 write.csv(butterflies, "~/Langes-metalmark-climate/Data/butterflies.csv")
