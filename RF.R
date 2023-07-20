@@ -25,6 +25,7 @@ hist(butterflies$logN) #looks much better
 butterflies <- butterflies[,-3]
 butterflies <- butterflies [,-2]
 butterflies <- butterflies[,-1]
+butterflies <- butterflies[-1,]
 
 ## Use the random forest algorithm to predict mpg using the other variables
 ## and then tune and optimize the RF model. 
@@ -147,5 +148,3 @@ varImpPlot(rf3, sort = TRUE, main = "Variable Importance Plot")
 dev.print(tiff, "varImpPlot_model3.tiff", height=4, width=6, units='in', res=300)
 
 # RF with just N, not logN
-
-butterfliesN <- 
