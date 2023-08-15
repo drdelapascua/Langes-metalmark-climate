@@ -424,7 +424,7 @@ agg_tbl <- dat %>%
   filter(Month == 8 ) %>% #filter only the month we want
   mutate(mass_norm = Air.max / sd(Air.max, na.rm = TRUE)) %>% #calculate means at 'min'
   group_by(Year) %>% 
-  summarise(august_max_temp_sd=sd(Air.max), #name the new means column
+  summarise(aug_max_temp_sd=sd(Air.max), #name the new means column
             .groups = 'drop')
 
 # convert tibble to df
@@ -601,12 +601,20 @@ years <- c(1986:2023)
 
 last_dec_max_temp_sd <- data.frame(years, nov_max_temp_sd)
 
-# breaking up winter variables
+# last september's max temperature 
+head(sept_max_temp_sd)
+last_sept_max_temp_sd <- sept_max_temp_sd$september_max_temp_sd
+last_sept_max_temp_sd <- head(last_sept_max_temp_sd, -1)
+years <- c(1986:2022)
 
-
+last_sept_max_temp_sd <- data.frame(years, last_sept_max_temp_sd)
 
 # upload occurance data
 butterflies <- read.csv("~/Langes-metalmark-climate/Data/abundance.csv")
+
+# make n-1 variable
+
+butterflies$N.1 <- butterflies$N
 
 #merge dataframes
 head(butterflies)
@@ -633,9 +641,9 @@ butterflies <- butterflies %>%
   left_join(july_max_temp_sd, join_by(Year)) %>%
   left_join(last_dec_max_temp, join_by(Year == years)) %>%
   left_join(last_dec_max_temp_sd, join_by(Year == years)) %>%
-  left_join(last_nov_max_temp_sd, join_by(Year == years))
-  
-  head(last_nov_max_temp_sd)
+  left_join(last_nov_max_temp_sd, join_by(Year == years)) %>%
+  left_join(last_sept_max_temp_sd, join_by(Year == years))
+
   
 head(butterflies)
   
